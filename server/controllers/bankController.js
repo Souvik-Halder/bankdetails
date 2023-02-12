@@ -14,3 +14,15 @@ exports.getAllBankDetails=catchAsyncErrors(async(req,res,next)=>{
     bankBranchDetails
   })
 })
+
+exports.getbranchDetails=catchAsyncErrors(async(req,res,next)=>{
+    const resultPerPage=10;
+    const id=req.params.id;
+    const apiFeature=new Apifeatures(bankBranch.find({bank_id:id}),req.query)
+    .pagination(resultPerPage)
+  const bankBranchDetails=await apiFeature.query;
+  res.status(200).json({
+    success:true,
+    bankBranchDetails
+  })
+})
